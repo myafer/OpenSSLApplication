@@ -24,14 +24,14 @@
     NSError *error = nil;
     NSString *publicKeyStr = [NSString stringWithFormat:@"-----BEGIN PUBLIC KEY-----\n%@\n-----END PUBLIC KEY-----",keystrr];
     [publicKeyStr writeToFile:RSAPublickKeyFile atomically:YES encoding:NSASCIIStringEncoding error:&error];
-    NSLog(@"%@", RSAPublickKeyFile);
+//    NSLog(@"%@", RSAPublickKeyFile);
 }
 
 - (void)writePrkWithKey:(NSString *)keystrr {
     NSError *error = nil;
-    NSString *publicKeyStr = [NSString stringWithFormat:@"%@",keystrr];
+    NSString *publicKeyStr = [NSString stringWithFormat:@"-----BEGIN RSA PRIVATE KEY-----\n%@\n-----END RSA PRIVATE KEY-----",keystrr];
     [publicKeyStr writeToFile:RSAPreviteKeyFile atomically:YES encoding:NSASCIIStringEncoding error:&error];
-    NSLog(@"%@", RSAPreviteKeyFile);
+//    NSLog(@"%@", RSAPreviteKeyFile);
 }
 
 - (BOOL)importRSAKeyWithType:(KeyType)type
