@@ -17,6 +17,8 @@
 		8F052A9C1BDFC9E80025A369 /* OpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052A9B1BDFC9E80025A369 /* OpenTests.m */; };
 		8F052BA11BDFD2F50025A369 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F052B531BDFD2F50025A369 /* libcrypto.a */; };
 		8F052BA21BDFD2F50025A369 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F052B541BDFD2F50025A369 /* libssl.a */; };
+		8F052BA71BDFD5670025A369 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052BA41BDFD5670025A369 /* Base64.m */; };
+		8F052BA81BDFD5670025A369 /* CRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052BA61BDFD5670025A369 /* CRSA.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +123,10 @@
 		8F052B9E1BDFD2F50025A369 /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
 		8F052B9F1BDFD2F50025A369 /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
 		8F052BA01BDFD2F50025A369 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
+		8F052BA31BDFD5670025A369 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		8F052BA41BDFD5670025A369 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		8F052BA51BDFD5670025A369 /* CRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSA.h; sourceTree = "<group>"; };
+		8F052BA61BDFD5670025A369 /* CRSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSA.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +170,10 @@
 		8F052A7B1BDFC9E70025A369 /* Open */ = {
 			isa = PBXGroup;
 			children = (
+				8F052BA31BDFD5670025A369 /* Base64.h */,
+				8F052BA41BDFD5670025A369 /* Base64.m */,
+				8F052BA51BDFD5670025A369 /* CRSA.h */,
+				8F052BA61BDFD5670025A369 /* CRSA.m */,
 				8F052B521BDFD2F50025A369 /* include */,
 				8F052A801BDFC9E80025A369 /* AppDelegate.h */,
 				8F052A811BDFC9E80025A369 /* AppDelegate.m */,
@@ -396,7 +406,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F052BA81BDFD5670025A369 /* CRSA.m in Sources */,
 				8F052A821BDFC9E80025A369 /* AppDelegate.m in Sources */,
+				8F052BA71BDFD5670025A369 /* Base64.m in Sources */,
 				8F052A7F1BDFC9E80025A369 /* main.m in Sources */,
 				8F052A881BDFC9E80025A369 /* ViewController.m in Sources */,
 				8F052A851BDFC9E80025A369 /* Open.xcdatamodeld in Sources */,
@@ -527,7 +539,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Open/include\"",
+				);
 				INFOPLIST_FILE = Open/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -542,7 +557,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Open/include\"",
+				);
 				INFOPLIST_FILE = Open/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
