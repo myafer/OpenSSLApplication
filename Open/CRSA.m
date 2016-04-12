@@ -20,16 +20,30 @@
     return _crsa;
 }
 
+- (NSString *)formattKeyStr:(NSString *)str {
+    if (str == nil) {
+        return @"";
+    }
+    NSInteger count = str.length / 64;
+    NSMutableString *foKeyStr = str.mutableCopy;
+    for (int i = 0; i < count; i ++) {
+        [foKeyStr insertString:@"\n" atIndex:64 + (64 + 1) * i];
+    }
+    NSLog(@"%ld", @"\n".length);
+    
+    return foKeyStr == nil ? @"" : foKeyStr;
+}
+
 - (void)writePukWithKey:(NSString *)keystrr {
     NSError *error = nil;
-    NSString *publicKeyStr = [NSString stringWithFormat:@"-----BEGIN PUBLIC KEY-----\n%@\n-----END PUBLIC KEY-----",keystrr];
+    NSString *publicKeyStr = [NSString stringWithFormat:@"-----BEGIN PUBLIC KEY-----\n%@\n-----END PUBLIC KEY-----", [self formattKeyStr:keystrr]];
     [publicKeyStr writeToFile:RSAPublickKeyFile atomically:YES encoding:NSASCIIStringEncoding error:&error];
-//    NSLog(@"%@", RSAPublickKeyFile);
+    NSLog(@"%@", RSAPublickKeyFile);
 }
 
 - (void)writePrkWithKey:(NSString *)keystrr {
     NSError *error = nil;
-    NSString *publicKeyStr = [NSString stringWithFormat:@"-----BEGIN RSA PRIVATE KEY-----\n%@\n-----END RSA PRIVATE KEY-----",keystrr];
+    NSString *publicKeyStr = [NSString stringWithFormat:@"-----BEGIN RSA PRIVATE KEY-----\n%@\n-----END RSA PRIVATE KEY-----", [self formattKeyStr:keystrr]];
     [publicKeyStr writeToFile:RSAPreviteKeyFile atomically:YES encoding:NSASCIIStringEncoding error:&error];
 //    NSLog(@"%@", RSAPreviteKeyFile);
 }
@@ -69,8 +83,13 @@
     return NO;
 }
 
-- (NSString *) encryptByRsa:(NSString*)content withKeyType:(KeyType)keyType
+- (NSString *)encryptByRsa:(NSString*)content withKeyType:(KeyType)keyType
 {
+    NSString *ret = [[self encryptByRsaToData:content withKeyType:keyType] base64EncodedString];
+    return ret;
+}
+
+- (NSData *)encryptByRsaToData:(NSString*)content withKeyType:(KeyType)keyType {
     if (![self importRSAKeyWithType:keyType])
         return nil;
     
@@ -105,8 +124,8 @@
         free(encData);
         encData = NULL;
         
-        NSString *ret = [returnData base64EncodedString];
-        return ret;
+//        NSString *ret = [returnData base64EncodedString];
+        return returnData;
     }
     
     free(encData);
@@ -114,6 +133,8 @@
     
     return nil;
 }
+
+
 
 - (NSString *) decryptByRsa:(NSString*)content withKeyType:(KeyType)keyType
 {

@@ -31,4 +31,6 @@ typedef enum : NSUInteger{
 // 写入私钥
 - (void)writePrkWithKey:(NSString *)keystrr;
 
+- (NSData *)encryptByRsaToData:(NSString*)content withKeyType:(KeyType)keyType;
+
 @end

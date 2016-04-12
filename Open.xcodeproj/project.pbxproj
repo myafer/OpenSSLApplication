@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42D897CF1CBC95F9005CC864 /* CRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D897CE1CBC95F9005CC864 /* CRSA.m */; };
+		42D897D21CBC960E005CC864 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D897D11CBC960E005CC864 /* AppDelegate.m */; };
 		8F052A7F1BDFC9E80025A369 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052A7E1BDFC9E80025A369 /* main.m */; };
-		8F052A821BDFC9E80025A369 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052A811BDFC9E80025A369 /* AppDelegate.m */; };
 		8F052A851BDFC9E80025A369 /* Open.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F052A831BDFC9E80025A369 /* Open.xcdatamodeld */; };
 		8F052A881BDFC9E80025A369 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052A871BDFC9E80025A369 /* ViewController.m */; };
 		8F052A8B1BDFC9E80025A369 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F052A891BDFC9E80025A369 /* Main.storyboard */; };
@@ -18,7 +19,6 @@
 		8F052BA11BDFD2F50025A369 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F052B531BDFD2F50025A369 /* libcrypto.a */; };
 		8F052BA21BDFD2F50025A369 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F052B541BDFD2F50025A369 /* libssl.a */; };
 		8F052BA71BDFD5670025A369 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052BA41BDFD5670025A369 /* Base64.m */; };
-		8F052BA81BDFD5670025A369 /* CRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052BA61BDFD5670025A369 /* CRSA.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,11 +32,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42D897CD1CBC95F9005CC864 /* CRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSA.h; sourceTree = "<group>"; };
+		42D897CE1CBC95F9005CC864 /* CRSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSA.m; sourceTree = "<group>"; };
+		42D897D01CBC960E005CC864 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		42D897D11CBC960E005CC864 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8F052A791BDFC9E70025A369 /* Open.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Open.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F052A7D1BDFC9E80025A369 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F052A7E1BDFC9E80025A369 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8F052A801BDFC9E80025A369 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		8F052A811BDFC9E80025A369 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8F052A841BDFC9E80025A369 /* Open.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Open.xcdatamodel; sourceTree = "<group>"; };
 		8F052A861BDFC9E80025A369 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8F052A871BDFC9E80025A369 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -125,8 +127,6 @@
 		8F052BA01BDFD2F50025A369 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		8F052BA31BDFD5670025A369 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		8F052BA41BDFD5670025A369 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		8F052BA51BDFD5670025A369 /* CRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSA.h; sourceTree = "<group>"; };
-		8F052BA61BDFD5670025A369 /* CRSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSA.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,11 +172,11 @@
 			children = (
 				8F052BA31BDFD5670025A369 /* Base64.h */,
 				8F052BA41BDFD5670025A369 /* Base64.m */,
-				8F052BA51BDFD5670025A369 /* CRSA.h */,
-				8F052BA61BDFD5670025A369 /* CRSA.m */,
+				42D897CD1CBC95F9005CC864 /* CRSA.h */,
+				42D897CE1CBC95F9005CC864 /* CRSA.m */,
+				42D897D01CBC960E005CC864 /* AppDelegate.h */,
+				42D897D11CBC960E005CC864 /* AppDelegate.m */,
 				8F052B521BDFD2F50025A369 /* include */,
-				8F052A801BDFC9E80025A369 /* AppDelegate.h */,
-				8F052A811BDFC9E80025A369 /* AppDelegate.m */,
 				8F052A861BDFC9E80025A369 /* ViewController.h */,
 				8F052A871BDFC9E80025A369 /* ViewController.m */,
 				8F052A891BDFC9E80025A369 /* Main.storyboard */,
@@ -406,9 +406,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F052BA81BDFD5670025A369 /* CRSA.m in Sources */,
-				8F052A821BDFC9E80025A369 /* AppDelegate.m in Sources */,
+				42D897CF1CBC95F9005CC864 /* CRSA.m in Sources */,
 				8F052BA71BDFD5670025A369 /* Base64.m in Sources */,
+				42D897D21CBC960E005CC864 /* AppDelegate.m in Sources */,
 				8F052A7F1BDFC9E80025A369 /* main.m in Sources */,
 				8F052A881BDFC9E80025A369 /* ViewController.m in Sources */,
 				8F052A851BDFC9E80025A369 /* Open.xcdatamodeld in Sources */,
@@ -624,6 +624,7 @@
 				8F052AA11BDFC9E80025A369 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8F052AA21BDFC9E80025A369 /* Build configuration list for PBXNativeTarget "OpenTests" */ = {
 			isa = XCConfigurationList;
@@ -632,6 +633,7 @@
 				8F052AA41BDFC9E80025A369 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
