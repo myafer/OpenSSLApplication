@@ -29,7 +29,7 @@
     for (int i = 0; i < count; i ++) {
         [foKeyStr insertString:@"\n" atIndex:64 + (64 + 1) * i];
     }
-    NSLog(@"%ld", @"\n".length);
+//    NSLog(@"%ld", @"\n".length);
     
     return foKeyStr == nil ? @"" : foKeyStr;
 }
@@ -38,7 +38,7 @@
     NSError *error = nil;
     NSString *publicKeyStr = [NSString stringWithFormat:@"-----BEGIN PUBLIC KEY-----\n%@\n-----END PUBLIC KEY-----", [self formattKeyStr:keystrr]];
     [publicKeyStr writeToFile:RSAPublickKeyFile atomically:YES encoding:NSASCIIStringEncoding error:&error];
-    NSLog(@"%@", RSAPublickKeyFile);
+//    NSLog(@"%@", RSAPublickKeyFile);
 }
 
 - (void)writePrkWithKey:(NSString *)keystrr {

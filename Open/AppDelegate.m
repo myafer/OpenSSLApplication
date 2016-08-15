@@ -39,27 +39,55 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    CRSA *cc = [CRSA shareInstance];
-    // 写入公钥
-    [cc writePukWithKey:PubKey];
-    [cc writePrkWithKey:PriKey];
-    
-    NSString *orstr = @"123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
-    NSMutableData *data = [NSMutableData data];
-    for (NSInteger i = 0; i < ceilf(orstr.length / 117.0); i ++) {
-        NSString *subStr = [orstr substringWithRange:NSMakeRange(i * 117, MIN(117, orstr.length - i * 117))];
-        NSLog(@"第%ld段 === %@", i, subStr);
-        [data appendData:[cc encryptByRsaToData:subStr withKeyType:(KeyTypePublic)]];
+    for (int i = 0; i < 10; i ++) {
+        [self test];
     }
-    NSLog(@"resultStr == %@", [data base64EncodedString]);
     
-    
-    NSString *oo = [cc encryptByRsa:@"12345" withKeyType:KeyTypePublic];
-    NSLog(@"%@", [cc decryptByRsa:oo withKeyType:(KeyTypePrivate)]);
+   
     
     
     return YES;
 }
+
+- (void)test {
+    static NSInteger num = 0;
+    CRSA *cc = [CRSA shareInstance];
+    // 写入公钥
+    [cc writePukWithKey:PubKey];
+    [cc writePrkWithKey:PriKey];
+    NSString *oo = @"这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
+    NSString *orstr = [oo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSMutableString *encryptStr = @"".mutableCopy;
+    for (NSInteger i = 0; i < ceilf(orstr.length / 117.0); i ++) {
+        NSString *subStr = [orstr substringWithRange:NSMakeRange(i * 117, MIN(117, orstr.length - i * 117))];
+        NSString *ss = [[cc encryptByRsaToData:subStr withKeyType:(KeyTypePublic)] base64EncodedString];
+        [encryptStr appendString:ss];
+    }
+    NSString *encryptResult = encryptStr;
+    NSMutableString *mutableResultStr = @"".mutableCopy;
+    for (NSInteger i = 0; i < ceilf(encryptResult.length / 172); i ++) {
+        NSString *subStr = [encryptResult substringWithRange:NSMakeRange(i * 172, 172)];
+        NSString *rrr = [cc decryptByRsa:subStr withKeyType:(KeyTypePrivate)];
+        NSString *sss = rrr.length <= 117 ? rrr : [rrr substringToIndex:117];
+        [mutableResultStr appendString:sss];
+
+    }
+    
+    NSString *re = mutableResultStr;
+    
+    if ([orstr isEqualToString:re]) {
+        NSLog(@"**********************************");
+        NSLog(@"*          解密成功！             *");
+        NSLog(@"*          解密成功！             *");
+        NSLog(@"*          解密成功！             *");
+        NSLog(@"**********************************");
+        NSLog(@"成功  %ld 次" , ++ num);
+        NSLog(@"%@", [re stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+    }
+
+    
+}
+
 
 
 @end
