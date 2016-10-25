@@ -45,30 +45,11 @@
     }
     double deltaTime = [[NSDate date] timeIntervalSinceDate:tmpStartData];
     NSLog(@"cost time  = %f", deltaTime / 100.0);
-   
-    
     
     return YES;
 }
 
-- (NSString *)encryptByRsaWith:(NSString *)str crsa:(CRSA *)cc {
-    NSString *orstr = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSMutableString *encryptStr = @"".mutableCopy;
-    for (NSInteger i = 0; i < ceilf(orstr.length / 117.0); i ++) {
-        NSString *subStr = [orstr substringWithRange:NSMakeRange(i * 117, MIN(117, orstr.length - i * 117))];
-        NSString *ss = [[cc encryptByRsaToData:subStr withKeyType:(KeyTypePublic)] base64EncodedString];
-        [encryptStr appendString:ss];
-    }
-    NSString *encryptResult = encryptStr;
-    NSMutableString *mutableResultStr = @"".mutableCopy;
-    for (NSInteger i = 0; i < ceilf(encryptResult.length / 172); i ++) {
-        NSString *subStr = [encryptResult substringWithRange:NSMakeRange(i * 172, 172)];
-        NSString *rrr = [cc decryptByRsa:subStr withKeyType:(KeyTypePrivate)];
-        NSString *sss = rrr.length <= 117 ? rrr : [rrr substringToIndex:117];
-        [mutableResultStr appendString:sss];
-    }
-    return mutableResultStr;
-}
+
 
 - (void)test {
     static NSInteger num = 0;
@@ -76,10 +57,12 @@
     // 写入公钥
     [cc writePukWithKey:PubKey];
     [cc writePrkWithKey:PriKey];
-    NSString *oo = @"这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
-    NSString *re = [self encryptByRsaWith:oo crsa:cc];
-    
-    if ([[oo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] isEqualToString:re]) {
+    NSString *oo = @"🔍这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
+    NSString *en = [cc encryptByRsaWith:oo keyType:(KeyTypePublic)];
+    NSLog(@"%@", en);
+    NSString *de = [cc decryptByRsaWith:en keyType:(KeyTypePrivate)];
+    NSLog(@"%@", de);
+    if ([oo isEqualToString:de]) {
         NSLog(@"**********************************");
         NSLog(@"*          解密成功！             *");
         NSLog(@"*          解密成功！             *");

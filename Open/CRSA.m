@@ -186,6 +186,30 @@
     return len;
 }
 
+- (NSString *)encryptByRsaWith:(NSString *)str keyType:(KeyType)keyType {
+    NSString *orstr = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSMutableString *encryptStr = @"".mutableCopy;
+    for (NSInteger i = 0; i < ceilf(orstr.length / 117.0); i ++) {
+        NSString *subStr = [orstr substringWithRange:NSMakeRange(i * 117, MIN(117, orstr.length - i * 117))];
+        NSString *ss = [[self encryptByRsaToData:subStr withKeyType:(keyType)] base64EncodedString];
+        [encryptStr appendString:ss];
+    }
+    return encryptStr;
+}
+
+
+- (NSString *)decryptByRsaWith:(NSString *)str keyType:(KeyType)keyType {
+    NSMutableString *mutableResultStr = @"".mutableCopy;
+    for (NSInteger i = 0; i < ceilf(str.length / 172); i ++) {
+        NSString *subStr = [str substringWithRange:NSMakeRange(i * 172, 172)];
+        NSString *rrr = [self decryptByRsa:subStr withKeyType:(keyType)];
+        NSString *sss = rrr.length <= 117 ? rrr : [rrr substringToIndex:117];
+        [mutableResultStr appendString:sss];
+    }
+    
+    return [mutableResultStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+}
 
 
 
