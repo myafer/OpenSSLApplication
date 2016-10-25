@@ -57,11 +57,9 @@
     // 写入公钥
     [cc writePukWithKey:PubKey];
     [cc writePrkWithKey:PriKey];
-    NSString *oo = @"🔍这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
+    NSString *oo = @"这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
     NSString *en = [cc encryptByRsaWith:oo keyType:(KeyTypePublic)];
-    NSLog(@"%@", en);
     NSString *de = [cc decryptByRsaWith:en keyType:(KeyTypePrivate)];
-    NSLog(@"%@", de);
     if ([oo isEqualToString:de]) {
         NSLog(@"**********************************");
         NSLog(@"*          解密成功！             *");
