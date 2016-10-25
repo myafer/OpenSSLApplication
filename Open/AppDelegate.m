@@ -39,24 +39,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    for (int i = 0; i < 10; i ++) {
+    NSDate *tmpStartData = [NSDate date];
+    for (int i = 0; i < 100; i ++) {
         [self test];
     }
-    
+    double deltaTime = [[NSDate date] timeIntervalSinceDate:tmpStartData];
+    NSLog(@"cost time  = %f", deltaTime / 100.0);
    
     
     
     return YES;
 }
 
-- (void)test {
-    static NSInteger num = 0;
-    CRSA *cc = [CRSA shareInstance];
-    // 写入公钥
-    [cc writePukWithKey:PubKey];
-    [cc writePrkWithKey:PriKey];
-    NSString *oo = @"这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
-    NSString *orstr = [oo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+- (NSString *)encryptByRsaWith:(NSString *)str crsa:(CRSA *)cc {
+    NSString *orstr = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSMutableString *encryptStr = @"".mutableCopy;
     for (NSInteger i = 0; i < ceilf(orstr.length / 117.0); i ++) {
         NSString *subStr = [orstr substringWithRange:NSMakeRange(i * 117, MIN(117, orstr.length - i * 117))];
@@ -70,19 +66,26 @@
         NSString *rrr = [cc decryptByRsa:subStr withKeyType:(KeyTypePrivate)];
         NSString *sss = rrr.length <= 117 ? rrr : [rrr substringToIndex:117];
         [mutableResultStr appendString:sss];
-
     }
+    return mutableResultStr;
+}
+
+- (void)test {
+    static NSInteger num = 0;
+    CRSA *cc = [CRSA shareInstance];
+    // 写入公钥
+    [cc writePukWithKey:PubKey];
+    [cc writePrkWithKey:PriKey];
+    NSString *oo = @"这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
+    NSString *re = [self encryptByRsaWith:oo crsa:cc];
     
-    NSString *re = mutableResultStr;
-    
-    if ([orstr isEqualToString:re]) {
+    if ([[oo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] isEqualToString:re]) {
         NSLog(@"**********************************");
         NSLog(@"*          解密成功！             *");
         NSLog(@"*          解密成功！             *");
         NSLog(@"*          解密成功！             *");
+        NSLog(@"*         成功  %ld 次            *" , ++ num);
         NSLog(@"**********************************");
-        NSLog(@"成功  %ld 次" , ++ num);
-        NSLog(@"%@", [re stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     }
 
     

@@ -355,6 +355,7 @@
 				TargetAttributes = {
 					8F052A781BDFC9E70025A369 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 4FGU9379L5;
 					};
 					8F052A941BDFC9E80025A369 = {
 						CreatedOnToolsVersion = 6.4;
@@ -539,6 +540,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4FGU9379L5;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,6 +552,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Open/include\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.---";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -558,6 +561,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4FGU9379L5;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -569,6 +573,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Open/include\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.---";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
