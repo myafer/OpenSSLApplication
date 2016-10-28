@@ -38,4 +38,6 @@ typedef enum : NSUInteger{
 // 解密 升级版 分段解密，中文解密
 - (NSString *)decryptByRsaWith:(NSString *)str keyType:(KeyType)keyType;
 
+
+- (NSString *)ddddecryptByRsa:(NSString*)content withKeyType:(KeyType)keyType;
 @end

@@ -212,5 +212,55 @@
 }
 
 
+- (NSString *)ddddecryptByRsa:(NSString*)content withKeyType:(KeyType)keyType
+{
+    if (![self importRSAKeyWithType:keyType])
+        return nil;
+    
+    NSData *data = [content base64DecodedData];
+    long int length = [data length];
+    char *muData = "";
+    int i = 0;
+    int offSet = 0;
+    while (length - offSet > 0) {
+        int status;
+        NSInteger flen = [self getBlockSizeWithRSA_PADDING_TYPE:PADDING];
+        if (length - offSet < flen) {
+            flen = length - offSet;
+        }
+        char *decData = (char*)malloc(flen);
+        char *tempData = "";
+        for (long j = offSet; j < offSet + flen; j ++) {
+            tempData[j] = ((char*)[data bytes])[j];
+        }
+        bzero(decData, flen);
+        status = RSA_private_decrypt(length, tempData, (unsigned char*)decData, _rsa, PADDING);
+        if (status)
+        {
+            muData = join(muData, decData);
+        }
+        i++;
+        offSet = i * flen;
+        free(decData);
+        decData = NULL;
+    }
+    NSMutableString *decryptString = [[NSMutableString alloc] initWithBytes:muData length:strlen(muData) encoding:NSASCIIStringEncoding];
+    return decryptString;
+}
+
+char *join(char *a, char *b) {
+    char *c = (char *) malloc(strlen(a) + strlen(b) + 1);
+    if (c == NULL) exit (1);
+    char *tempc = c;
+    while (*a != '\0') {
+        *c++ = *a++;
+    }
+    while ((*c++ = *b++) != '\0') {
+        ;
+    }
+    return tempc;
+}
+
+
 
 @end
