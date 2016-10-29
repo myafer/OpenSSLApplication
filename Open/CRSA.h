@@ -40,4 +40,7 @@ typedef enum : NSUInteger{
 
 
 - (NSString *)ddddecryptByRsa:(NSString*)content withKeyType:(KeyType)keyType;
+
+
+- (NSString *)decryptByRsaWithCutData:(NSString*)content keyType:(KeyType)keyType;
 @end

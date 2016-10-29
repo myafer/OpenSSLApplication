@@ -211,6 +211,40 @@
 
 }
 
+- (NSString *)decryptByRsaWithCutData:(NSString*)content keyType:(KeyType)keyType {
+    if (![self importRSAKeyWithType:keyType])
+        return nil;
+    
+    NSData *data = [content base64DecodedData];
+    NSInteger length = [data length];
+    float block_length = 128.0;
+    char *muData = "";
+    for (NSInteger i = 0; i < ceilf(length / block_length); i++) {
+        NSInteger location = i * block_length;
+        NSData *tmpData = [NSData data];
+        if (length > location) {
+            tmpData = [data subdataWithRange:NSMakeRange(location, block_length)];
+        } else {
+            tmpData = [data subdataWithRange:NSMakeRange(location, length - location)];
+        }
+        int status = 0;
+        char *decData = (char*)malloc([tmpData length]);
+        if (keyType == KeyTypePublic) {
+            status = RSA_public_decrypt(length, (unsigned char *)[tmpData bytes], (unsigned char *)decData, _rsa, PADDING);
+        } else {
+            status = RSA_private_decrypt(length, (unsigned char *)[tmpData bytes], (unsigned char *)decData, _rsa, PADDING);
+        }
+        if (status) {
+            muData = join(muData, decData);
+        } else {
+            return @"";
+        }
+    }
+    
+    NSMutableString *decryptString = [[NSMutableString alloc] initWithBytes:muData length:strlen(muData) encoding:NSASCIIStringEncoding];
+    return decryptString;
+}
+
 
 - (NSString *)ddddecryptByRsa:(NSString*)content withKeyType:(KeyType)keyType
 {

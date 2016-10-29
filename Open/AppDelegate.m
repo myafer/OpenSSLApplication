@@ -57,7 +57,9 @@
 //
 //    NSLog(@"呜呜呜呜 %@", [cc decryptByRsaWith:@"K1xo7J8Vz/GvW0y6Z8fdXx3xVCUv9zu6flbVf+gLYTNAGLbSwPe+bRaKy7Sp3YAUHAIpKQU9u9Q1\n3sIbZn7fGzrsdl5ZwiTVEztbmg9EJKmxGKSxTpuJMhhSe6eRG3S+3XkvNjSv3Vw0Tc86Rk13doy7" keyType:(KeyTypePublic)]);
     
-    NSLog(@"44444 %@", [cc ddddecryptByRsa:@"K1xo7J8Vz/GvW0y6Z8fdXx3xVCUv9zu6flbVf+gLYTNAGLbSwPe+bRaKy7Sp3YAUHAIpKQU9u9Q13sIbZn7fGzrsdl5ZwiTVEztbmg9EJKmxGKSxTpuJMhhSe6eRG3S+3XkvNjSv3Vw0Tc86Rk13doy7+/EhljessvkX8X5lq6WCo4xHo6GnzAQU0qkcoaWkEe15lKnpRaRw8lpQDC1GMMW825MO/T5YVQLBWOLKoXKVgMgYBII3lS1RQXcV8SU5+lWys6lkRsshsOkXrcQFDZkDZ07Zllq1WXuBIaDHY6gN6wTyC9C7jiw4IMNUCnBk0+VgRg5wo70TVE0sbRqR1A==" withKeyType:(KeyTypePrivate)]);
+    NSLog(@"44444 %@", [cc decryptByRsaWithCutData:@"K1xo7J8Vz/GvW0y6Z8fdXx3xVCUv9zu6flbVf+gLYTNAGLbSwPe+bRaKy7Sp3YAUHAIpKQU9u9Q13sIbZn7fGzrsdl5ZwiTVEztbmg9EJKmxGKSxTpuJMhhSe6eRG3S+3XkvNjSv3Vw0Tc86Rk13doy7+/EhljessvkX8X5lq6WCo4xHo6GnzAQU0qkcoaWkEe15lKnpRaRw8lpQDC1GMMW825MO/T5YVQLBWOLKoXKVgMgYBII3lS1RQXcV8SU5+lWys6lkRsshsOkXrcQFDZkDZ07Zllq1WXuBIaDHY6gN6wTyC9C7jiw4IMNUCnBk0+VgRg5wo70TVE0sbRqR1A==" keyType:(KeyTypePublic)]);
+    
+    
     NSLog(@"%ld", @"K1xo7J8Vz/GvW0y6Z8fdXx3xVCUv9zu6flbVf+gLYTNAGLbSwPe+bRaKy7Sp3YAUHAIpKQU9u9Q1\n3sIbZn7fGzrsdl5ZwiTVEztbmg9EJKmxGKSxTpuJMhhSe6eRG3S+3XkvNjSv3Vw0Tc86Rk13doy7".length);
     
 }
