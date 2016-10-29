@@ -25,8 +25,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    CRSA *cc = [CRSA shareInstance];
+    // 写入公钥
+    [cc writePukWithKey:PubKey];
+    [cc writePrkWithKey:PriKey];
     NSDate *tmpStartData = [NSDate date];
-    for (int i = 0; i < 1; i ++) {
+    for (int i = 0; i < 100; i ++) {
         [self test];
     }
     double deltaTime = [[NSDate date] timeIntervalSinceDate:tmpStartData];
@@ -41,9 +45,9 @@
     static NSInteger num = 0;
     CRSA *cc = [CRSA shareInstance];
     // 写入公钥
-    [cc writePukWithKey:PubKey];
-    [cc writePrkWithKey:PriKey];
-//    NSString *oo = @"这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
+//    [cc writePukWithKey:PubKey];
+//    [cc writePrkWithKey:PriKey];
+    NSString *oo = @"这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
 //    NSString *en = [cc encryptByRsaWith:oo keyType:(KeyTypePrivate)];
 //    NSString *de = [cc decryptByRsaWith:en keyType:(KeyTypePublic)];
 //    if ([oo isEqualToString:de]) {
@@ -54,13 +58,24 @@
 //        NSLog(@"*         成功  %ld 次            *" , ++ num);
 //        NSLog(@"**********************************");
 //    }
-//
-//    NSLog(@"呜呜呜呜 %@", [cc decryptByRsaWith:@"K1xo7J8Vz/GvW0y6Z8fdXx3xVCUv9zu6flbVf+gLYTNAGLbSwPe+bRaKy7Sp3YAUHAIpKQU9u9Q1\n3sIbZn7fGzrsdl5ZwiTVEztbmg9EJKmxGKSxTpuJMhhSe6eRG3S+3XkvNjSv3Vw0Tc86Rk13doy7" keyType:(KeyTypePublic)]);
+
+
+    // 加解密不支持中文 需要预先转码
+//    NSString *en = [cc encryptByRsaWithCutData:[oo base64EncodedString] keyType:(KeyTypePrivate)];
+//    NSString *de = [cc decryptByRsaWithCutData:en keyType:(KeyTypePublic)];    
+//    if ([oo isEqualToString:[de base64DecodedString]]) {
+//        NSLog(@"**********************************");
+//        NSLog(@"*          解密成功！             *");
+//        NSLog(@"*          解密成功！             *");
+//        NSLog(@"*          解密成功！             *");
+//        NSLog(@"*         成功  %ld 次            *" , ++ num);
+//        NSLog(@"**********************************");
+//    }
+
     
-    NSLog(@"44444 %@", [cc decryptByRsaWithCutData:@"K1xo7J8Vz/GvW0y6Z8fdXx3xVCUv9zu6flbVf+gLYTNAGLbSwPe+bRaKy7Sp3YAUHAIpKQU9u9Q13sIbZn7fGzrsdl5ZwiTVEztbmg9EJKmxGKSxTpuJMhhSe6eRG3S+3XkvNjSv3Vw0Tc86Rk13doy7+/EhljessvkX8X5lq6WCo4xHo6GnzAQU0qkcoaWkEe15lKnpRaRw8lpQDC1GMMW825MO/T5YVQLBWOLKoXKVgMgYBII3lS1RQXcV8SU5+lWys6lkRsshsOkXrcQFDZkDZ07Zllq1WXuBIaDHY6gN6wTyC9C7jiw4IMNUCnBk0+VgRg5wo70TVE0sbRqR1A==" keyType:(KeyTypePublic)]);
+    NSLog(@"44444 \n%@", [cc decryptByRsaWithCutData:@"K1xo7J8Vz/GvW0y6Z8fdXx3xVCUv9zu6flbVf+gLYTNAGLbSwPe+bRaKy7Sp3YAUHAIpKQU9u9Q13sIbZn7fGzrsdl5ZwiTVEztbmg9EJKmxGKSxTpuJMhhSe6eRG3S+3XkvNjSv3Vw0Tc86Rk13doy7+/EhljessvkX8X5lq6WCo4xHo6GnzAQU0qkcoaWkEe15lKnpRaRw8lpQDC1GMMW825MO/T5YVQLBWOLKoXKVgMgYBII3lS1RQXcV8SU5+lWys6lkRsshsOkXrcQFDZkDZ07Zllq1WXuBIaDHY6gN6wTyC9C7jiw4IMNUCnBk0+VgRg5wo70TVE0sbRqR1A==" keyType:(KeyTypePublic)]);
+    NSLog(@"*         成功  %ld 次            *" , ++ num);
     
-    
-    NSLog(@"%ld", @"K1xo7J8Vz/GvW0y6Z8fdXx3xVCUv9zu6flbVf+gLYTNAGLbSwPe+bRaKy7Sp3YAUHAIpKQU9u9Q1\n3sIbZn7fGzrsdl5ZwiTVEztbmg9EJKmxGKSxTpuJMhhSe6eRG3S+3XkvNjSv3Vw0Tc86Rk13doy7".length);
     
 }
 

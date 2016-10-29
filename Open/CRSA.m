@@ -211,6 +211,43 @@
 
 }
 
+- (NSString *)encryptByRsaWithCutData:(NSString*)content keyType:(KeyType)keyType {
+    if (![self importRSAKeyWithType:keyType])
+        return nil;
+    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    NSInteger length = [data length];
+    float block_length = 117.0;
+    NSMutableData *muData = [NSMutableData data];
+    for (NSInteger i = 0; i < ceilf(length / block_length); i++) {
+        NSInteger location = i * block_length;
+        NSData *tmpData = [NSData data];
+        if (length - location > block_length) {
+            tmpData = [data subdataWithRange:NSMakeRange(location, block_length)];
+        } else {
+            tmpData = [data subdataWithRange:NSMakeRange(location, length - location)];
+        }
+        int status = 0;
+        char *enData = (char*)malloc([tmpData length]);
+        bzero(enData, [tmpData length]);
+        if (keyType == KeyTypePublic) {
+            status = RSA_public_encrypt([tmpData length], (unsigned char *)[tmpData bytes], (unsigned char *)enData, _rsa, PADDING);
+        } else {
+            status = RSA_private_encrypt([tmpData length], (unsigned char *)[tmpData bytes], (unsigned char *)enData, _rsa, PADDING);
+        }
+        if (status) {
+            [muData appendBytes:enData length:status];
+//            free(enData);
+//            enData = NULL;
+        } else {
+//            free(enData);
+//            enData = NULL;
+            return @"";
+        }
+    }
+    return [muData base64EncodedString];
+    
+}
+
 - (NSString *)decryptByRsaWithCutData:(NSString*)content keyType:(KeyType)keyType {
     if (![self importRSAKeyWithType:keyType])
         return nil;
@@ -222,27 +259,32 @@
     for (NSInteger i = 0; i < ceilf(length / block_length); i++) {
         NSInteger location = i * block_length;
         NSData *tmpData = [NSData data];
-        if (length > location) {
+        if (length - location > block_length) {
             tmpData = [data subdataWithRange:NSMakeRange(location, block_length)];
         } else {
             tmpData = [data subdataWithRange:NSMakeRange(location, length - location)];
         }
         int status = 0;
         char *decData = (char*)malloc([tmpData length]);
+        bzero(decData, [tmpData length]);
         if (keyType == KeyTypePublic) {
-            status = RSA_public_decrypt(length, (unsigned char *)[tmpData bytes], (unsigned char *)decData, _rsa, PADDING);
+            status = RSA_public_decrypt([tmpData length], (unsigned char *)[tmpData bytes], (unsigned char *)decData, _rsa, PADDING);
         } else {
-            status = RSA_private_decrypt(length, (unsigned char *)[tmpData bytes], (unsigned char *)decData, _rsa, PADDING);
+            status = RSA_private_decrypt([tmpData length], (unsigned char *)[tmpData bytes], (unsigned char *)decData, _rsa, PADDING);
         }
         if (status) {
             muData = join(muData, decData);
+            free(decData);
+            decData = NULL;
         } else {
+            free(decData);
+            decData = NULL;
             return @"";
         }
     }
     
     NSMutableString *decryptString = [[NSMutableString alloc] initWithBytes:muData length:strlen(muData) encoding:NSASCIIStringEncoding];
-    return decryptString;
+    return [decryptString == nil ? @"" : decryptString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 }
 
 

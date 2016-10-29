@@ -33,14 +33,14 @@ typedef enum : NSUInteger{
 
 - (NSData *)encryptByRsaToData:(NSString*)content withKeyType:(KeyType)keyType;
 
-// 加密 升级版 分段加密，中文加密
+// string 分割加解密 支持中文
 - (NSString *)encryptByRsaWith:(NSString *)str keyType:(KeyType)keyType;
-// 解密 升级版 分段解密，中文解密
 - (NSString *)decryptByRsaWith:(NSString *)str keyType:(KeyType)keyType;
 
 
 - (NSString *)ddddecryptByRsa:(NSString*)content withKeyType:(KeyType)keyType;
 
-
+// data 分割加解密 不支持中文 需要预先转码
+- (NSString *)encryptByRsaWithCutData:(NSString*)content keyType:(KeyType)keyType;
 - (NSString *)decryptByRsaWithCutData:(NSString*)content keyType:(KeyType)keyType;
 @end
