@@ -43,11 +43,24 @@
 
 - (void)test {
     static NSInteger num = 0;
+    
+    //      CRSA采用PCKS8证书类型
+    //      生成网址： http://web.chacuo.net/netrsakeypair
+    //      简书：    http://www.jianshu.com/p/4580bee4f62f
+    //      如果对你有所帮助，希望你能给个star。
+    //      如果你需要帮助，欢迎拿红包砸我。
+    //      欢迎大家分享出自己的服务端代码，让这个库更加完善。
+    
     CRSA *cc = [CRSA shareInstance];
     // 写入公钥
-//    [cc writePukWithKey:PubKey];
-//    [cc writePrkWithKey:PriKey];
+    [cc writePukWithKey:PubKey];
+    [cc writePrkWithKey:PriKey];
     NSString *oo = @"这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。这本应该是iOS中一个标准、内置的解决空table和collection view的方式。默认的如果你的table view是空的，屏幕就是空的。但这不是你能提供的最好的用户体验。";
+    
+    // 🌰1. 加密支持中文 不需要转码
+    // 加密过程： str -> utf8编码 -> 字符串分割 -> 循环加密 -> 拼接 -> 结果
+    // 解密过程： str -> 字符串分割 -> 循环解密 -> 拼接 -> utf8解码 -> 原字符串
+    
 //    NSString *en = [cc encryptByRsaWith:oo keyType:(KeyTypePrivate)];
 //    NSString *de = [cc decryptByRsaWith:en keyType:(KeyTypePublic)];
 //    if ([oo isEqualToString:de]) {
@@ -60,21 +73,19 @@
 //    }
 
 
-    // 加解密不支持中文 需要预先转码
-//    NSString *en = [cc encryptByRsaWithCutData:[oo base64EncodedString] keyType:(KeyTypePrivate)];
-//    NSString *de = [cc decryptByRsaWithCutData:en keyType:(KeyTypePublic)];    
-//    if ([oo isEqualToString:[de base64DecodedString]]) {
-//        NSLog(@"**********************************");
-//        NSLog(@"*          解密成功！             *");
-//        NSLog(@"*          解密成功！             *");
-//        NSLog(@"*          解密成功！             *");
-//        NSLog(@"*         成功  %ld 次            *" , ++ num);
-//        NSLog(@"**********************************");
-//    }
-
+    // 🌰2. 加解密不支持中文 需要预先转码 配套Java代码在项目内
     
-    NSLog(@"44444 \n%@", [cc decryptByRsaWithCutData:@"K1xo7J8Vz/GvW0y6Z8fdXx3xVCUv9zu6flbVf+gLYTNAGLbSwPe+bRaKy7Sp3YAUHAIpKQU9u9Q13sIbZn7fGzrsdl5ZwiTVEztbmg9EJKmxGKSxTpuJMhhSe6eRG3S+3XkvNjSv3Vw0Tc86Rk13doy7+/EhljessvkX8X5lq6WCo4xHo6GnzAQU0qkcoaWkEe15lKnpRaRw8lpQDC1GMMW825MO/T5YVQLBWOLKoXKVgMgYBII3lS1RQXcV8SU5+lWys6lkRsshsOkXrcQFDZkDZ07Zllq1WXuBIaDHY6gN6wTyC9C7jiw4IMNUCnBk0+VgRg5wo70TVE0sbRqR1A==" keyType:(KeyTypePublic)]);
-    NSLog(@"*         成功  %ld 次            *" , ++ num);
+    NSString *en1 = [cc encryptByRsaWithCutData:[oo base64EncodedString] keyType:(KeyTypePrivate)];
+    NSString *de1 = [cc decryptByRsaWithCutData:en1 keyType:(KeyTypePublic)];
+    if ([oo isEqualToString:[de1 base64DecodedString]]) {
+        NSLog(@"**********************************");
+        NSLog(@"*          解密成功！             *");
+        NSLog(@"*          解密成功！             *");
+        NSLog(@"*          解密成功！             *");
+        NSLog(@"*         成功  %ld 次            *" , ++ num);
+        NSLog(@"**********************************");
+    }
+
     
     
 }

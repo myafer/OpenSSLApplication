@@ -218,6 +218,8 @@
     NSInteger length = [data length];
     float block_length = 117.0;
     NSMutableData *muData = [NSMutableData data];
+    char *enData = (char*)malloc(block_length);
+    bzero(enData, block_length);
     for (NSInteger i = 0; i < ceilf(length / block_length); i++) {
         NSInteger location = i * block_length;
         NSData *tmpData = [NSData data];
@@ -226,9 +228,8 @@
         } else {
             tmpData = [data subdataWithRange:NSMakeRange(location, length - location)];
         }
+        
         int status = 0;
-        char *enData = (char*)malloc([tmpData length]);
-        bzero(enData, [tmpData length]);
         if (keyType == KeyTypePublic) {
             status = RSA_public_encrypt([tmpData length], (unsigned char *)[tmpData bytes], (unsigned char *)enData, _rsa, PADDING);
         } else {
@@ -236,11 +237,9 @@
         }
         if (status) {
             [muData appendBytes:enData length:status];
-//            free(enData);
-//            enData = NULL;
+    
         } else {
-//            free(enData);
-//            enData = NULL;
+            
             return @"";
         }
     }
@@ -285,43 +284,6 @@
     
     NSMutableString *decryptString = [[NSMutableString alloc] initWithBytes:muData length:strlen(muData) encoding:NSASCIIStringEncoding];
     return [decryptString == nil ? @"" : decryptString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-}
-
-
-- (NSString *)ddddecryptByRsa:(NSString*)content withKeyType:(KeyType)keyType
-{
-    if (![self importRSAKeyWithType:keyType])
-        return nil;
-    
-    NSData *data = [content base64DecodedData];
-    long int length = [data length];
-    char *muData = "";
-    int i = 0;
-    int offSet = 0;
-    while (length - offSet > 0) {
-        int status;
-        NSInteger flen = [self getBlockSizeWithRSA_PADDING_TYPE:PADDING];
-        if (length - offSet < flen) {
-            flen = length - offSet;
-        }
-        char *decData = (char*)malloc(flen);
-        char *tempData = "";
-        for (long j = offSet; j < offSet + flen; j ++) {
-            tempData[j] = ((char*)[data bytes])[j];
-        }
-        bzero(decData, flen);
-        status = RSA_private_decrypt(length, tempData, (unsigned char*)decData, _rsa, PADDING);
-        if (status)
-        {
-            muData = join(muData, decData);
-        }
-        i++;
-        offSet = i * flen;
-        free(decData);
-        decData = NULL;
-    }
-    NSMutableString *decryptString = [[NSMutableString alloc] initWithBytes:muData length:strlen(muData) encoding:NSASCIIStringEncoding];
-    return decryptString;
 }
 
 char *join(char *a, char *b) {

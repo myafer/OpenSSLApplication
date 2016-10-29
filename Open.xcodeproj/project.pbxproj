@@ -15,21 +15,10 @@
 		8F052A8B1BDFC9E80025A369 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F052A891BDFC9E80025A369 /* Main.storyboard */; };
 		8F052A8D1BDFC9E80025A369 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F052A8C1BDFC9E80025A369 /* Images.xcassets */; };
 		8F052A901BDFC9E80025A369 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F052A8E1BDFC9E80025A369 /* LaunchScreen.xib */; };
-		8F052A9C1BDFC9E80025A369 /* OpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052A9B1BDFC9E80025A369 /* OpenTests.m */; };
 		8F052BA11BDFD2F50025A369 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F052B531BDFD2F50025A369 /* libcrypto.a */; };
 		8F052BA21BDFD2F50025A369 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F052B541BDFD2F50025A369 /* libssl.a */; };
 		8F052BA71BDFD5670025A369 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F052BA41BDFD5670025A369 /* Base64.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		8F052A961BDFC9E80025A369 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8F052A711BDFC9E70025A369 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8F052A781BDFC9E70025A369;
-			remoteInfo = Open;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		42D897CD1CBC95F9005CC864 /* CRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSA.h; sourceTree = "<group>"; };
@@ -45,9 +34,6 @@
 		8F052A8A1BDFC9E80025A369 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8F052A8C1BDFC9E80025A369 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8F052A8F1BDFC9E80025A369 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		8F052A951BDFC9E80025A369 /* OpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F052A9A1BDFC9E80025A369 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F052A9B1BDFC9E80025A369 /* OpenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenTests.m; sourceTree = "<group>"; };
 		8F052B531BDFD2F50025A369 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		8F052B541BDFD2F50025A369 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		8F052B561BDFD2F50025A369 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
@@ -139,13 +125,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8F052A921BDFC9E80025A369 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -153,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				8F052A7B1BDFC9E70025A369 /* Open */,
-				8F052A981BDFC9E80025A369 /* OpenTests */,
 				8F052A7A1BDFC9E70025A369 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -162,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				8F052A791BDFC9E70025A369 /* Open.app */,
-				8F052A951BDFC9E80025A369 /* OpenTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,8 +153,8 @@
 				42D897CE1CBC95F9005CC864 /* CRSA.m */,
 				42D897D01CBC960E005CC864 /* AppDelegate.h */,
 				42D897D11CBC960E005CC864 /* AppDelegate.m */,
-				8F052B521BDFD2F50025A369 /* include */,
 				8F052A861BDFC9E80025A369 /* ViewController.h */,
+				8F052B521BDFD2F50025A369 /* include */,
 				8F052A871BDFC9E80025A369 /* ViewController.m */,
 				8F052A891BDFC9E80025A369 /* Main.storyboard */,
 				8F052A8C1BDFC9E80025A369 /* Images.xcassets */,
@@ -193,23 +170,6 @@
 			children = (
 				8F052A7D1BDFC9E80025A369 /* Info.plist */,
 				8F052A7E1BDFC9E80025A369 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8F052A981BDFC9E80025A369 /* OpenTests */ = {
-			isa = PBXGroup;
-			children = (
-				8F052A9B1BDFC9E80025A369 /* OpenTests.m */,
-				8F052A991BDFC9E80025A369 /* Supporting Files */,
-			);
-			path = OpenTests;
-			sourceTree = "<group>";
-		};
-		8F052A991BDFC9E80025A369 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8F052A9A1BDFC9E80025A369 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -326,40 +286,18 @@
 			productReference = 8F052A791BDFC9E70025A369 /* Open.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8F052A941BDFC9E80025A369 /* OpenTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8F052AA21BDFC9E80025A369 /* Build configuration list for PBXNativeTarget "OpenTests" */;
-			buildPhases = (
-				8F052A911BDFC9E80025A369 /* Sources */,
-				8F052A921BDFC9E80025A369 /* Frameworks */,
-				8F052A931BDFC9E80025A369 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8F052A971BDFC9E80025A369 /* PBXTargetDependency */,
-			);
-			name = OpenTests;
-			productName = OpenTests;
-			productReference = 8F052A951BDFC9E80025A369 /* OpenTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8F052A711BDFC9E70025A369 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Afer;
 				TargetAttributes = {
 					8F052A781BDFC9E70025A369 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 4FGU9379L5;
-					};
-					8F052A941BDFC9E80025A369 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 8F052A781BDFC9E70025A369;
 					};
 				};
 			};
@@ -377,7 +315,6 @@
 			projectRoot = "";
 			targets = (
 				8F052A781BDFC9E70025A369 /* Open */,
-				8F052A941BDFC9E80025A369 /* OpenTests */,
 			);
 		};
 /* End PBXProject section */
@@ -390,13 +327,6 @@
 				8F052A8B1BDFC9E80025A369 /* Main.storyboard in Resources */,
 				8F052A901BDFC9E80025A369 /* LaunchScreen.xib in Resources */,
 				8F052A8D1BDFC9E80025A369 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8F052A931BDFC9E80025A369 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,23 +346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8F052A911BDFC9E80025A369 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8F052A9C1BDFC9E80025A369 /* OpenTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8F052A971BDFC9E80025A369 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8F052A781BDFC9E70025A369 /* Open */;
-			targetProxy = 8F052A961BDFC9E80025A369 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8F052A891BDFC9E80025A369 /* Main.storyboard */ = {
@@ -467,14 +381,17 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -490,7 +407,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -511,8 +428,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -528,7 +447,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -547,6 +466,7 @@
 					"\"$(SRCROOT)/Open/include\"",
 				);
 				INFOPLIST_FILE = Open/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -568,6 +488,7 @@
 					"\"$(SRCROOT)/Open/include\"",
 				);
 				INFOPLIST_FILE = Open/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -575,40 +496,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.---";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		8F052AA31BDFC9E80025A369 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = OpenTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Open.app/Open";
-			};
-			name = Debug;
-		};
-		8F052AA41BDFC9E80025A369 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = OpenTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Open.app/Open";
 			};
 			name = Release;
 		};
@@ -629,15 +516,6 @@
 			buildConfigurations = (
 				8F052AA01BDFC9E80025A369 /* Debug */,
 				8F052AA11BDFC9E80025A369 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8F052AA21BDFC9E80025A369 /* Build configuration list for PBXNativeTarget "OpenTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8F052AA31BDFC9E80025A369 /* Debug */,
-				8F052AA41BDFC9E80025A369 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
