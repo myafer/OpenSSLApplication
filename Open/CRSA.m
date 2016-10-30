@@ -218,8 +218,7 @@
     NSInteger length = [data length];
     float block_length = 117.0;
     NSMutableData *muData = [NSMutableData data];
-    char *enData = (char*)malloc(block_length);
-    bzero(enData, block_length);
+
     for (NSInteger i = 0; i < ceilf(length / block_length); i++) {
         NSInteger location = i * block_length;
         NSData *tmpData = [NSData data];
@@ -228,7 +227,8 @@
         } else {
             tmpData = [data subdataWithRange:NSMakeRange(location, length - location)];
         }
-        
+        char *enData = (char*)malloc(block_length);
+        bzero(enData, block_length);
         int status = 0;
         if (keyType == KeyTypePublic) {
             status = RSA_public_encrypt([tmpData length], (unsigned char *)[tmpData bytes], (unsigned char *)enData, _rsa, PADDING);
@@ -237,14 +237,15 @@
         }
         if (status) {
             [muData appendBytes:enData length:status];
-    
+            free(enData);
+            enData = NULL;
         } else {
-            
+            free(enData);
+            enData = NULL;
             return @"";
         }
     }
-    free(enData);
-    enData = NULL;
+
     return [muData base64EncodedString];
     
 }
@@ -256,7 +257,8 @@
     NSData *data = [content base64DecodedData];
     NSInteger length = [data length];
     float block_length = 128.0;
-    char *muData = "";
+    char *muData = (char*)malloc(1);
+    *muData = 0;
     for (NSInteger i = 0; i < ceilf(length / block_length); i++) {
         NSInteger location = i * block_length;
         NSData *tmpData = [NSData data];
@@ -292,6 +294,7 @@
 
 char *join(char *a, char *b) {
     char *c = (char *) malloc(strlen(a) + strlen(b) + 1);
+    char *head = a;
     if (c == NULL) exit (1);
     char *tempc = c;
     while (*a != '\0') {
@@ -300,6 +303,8 @@ char *join(char *a, char *b) {
     while ((*c++ = *b++) != '\0') {
         ;
     }
+    free(head);
+    head = NULL;
     return tempc;
 }
 
