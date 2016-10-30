@@ -243,6 +243,8 @@
             return @"";
         }
     }
+    free(enData);
+    enData = NULL;
     return [muData base64EncodedString];
     
 }
@@ -283,6 +285,8 @@
     }
     
     NSMutableString *decryptString = [[NSMutableString alloc] initWithBytes:muData length:strlen(muData) encoding:NSASCIIStringEncoding];
+    free(muData);
+    muData = NULL;
     return [decryptString == nil ? @"" : decryptString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 }
 
