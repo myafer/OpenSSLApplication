@@ -1,4 +1,6 @@
 
+[![Build Status](https://travis-ci.org/myafer/OpenSSLApplication.svg?branch=master)](https://travis-ci.org/myafer/OpenSSLApplication)
+
 > 经过1年的读者反馈，总结出来的比较完善的加密解密库。
 
 1. 解决加密长度限制
