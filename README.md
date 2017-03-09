@@ -1,6 +1,9 @@
 
 [![Build Status](https://travis-ci.org/myafer/OpenSSLApplication.svg?branch=master)](https://travis-ci.org/myafer/OpenSSLApplication)
-
+[![GitHub issues](https://img.shields.io/github/issues/myafer/OpenSSLApplication.svg)](https://github.com/myafer/OpenSSLApplication/issues)
+[![GitHub forks](https://img.shields.io/github/forks/myafer/OpenSSLApplication.svg)](https://github.com/myafer/OpenSSLApplication/network)
+[![GitHub stars](https://img.shields.io/github/stars/myafer/OpenSSLApplication.svg)](https://github.com/myafer/OpenSSLApplication/stargazers)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/myafer/OpenSSLApplication.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 > 经过1年的读者反馈，总结出来的比较完善的加密解密库。
 
 1. 解决加密长度限制
