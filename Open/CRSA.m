@@ -4,6 +4,7 @@
 #import "Base64.h"
 
 #define PADDING RSA_PKCS1_PADDING
+#define PADDING_FLOAT_LEN [self getBlockSizeWithRSA_PADDING_TYPE:PADDING] * 1.0
 #define DocumentsDir [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 #define OpenSSLRSAKeyDir [DocumentsDir stringByAppendingPathComponent:@".openssl_rsa"]
 #define RSAPublickKeyFile [DocumentsDir stringByAppendingPathComponent:@"public_key.pem"]
@@ -182,15 +183,25 @@
     if (padding_type == RSA_PADDING_TYPE_PKCS1 || padding_type == RSA_PADDING_TYPE_SSLV23) {
         len -= 11;
     }
-    
+
     return len;
 }
 
 - (NSString *)encryptByRsaWith:(NSString *)str keyType:(KeyType)keyType {
     NSString *orstr = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSMutableString *encryptStr = @"".mutableCopy;
-    for (NSInteger i = 0; i < ceilf(orstr.length / 117.0); i ++) {
-        NSString *subStr = [orstr substringWithRange:NSMakeRange(i * 117, MIN(117, orstr.length - i * 117))];
+    for (NSInteger i = 0; i < ceilf(orstr.length / PADDING_FLOAT_LEN); i ++) {
+        NSString *subStr = [orstr substringWithRange:NSMakeRange(i * PADDING_FLOAT_LEN, MIN(PADDING_FLOAT_LEN, orstr.length - i * PADDING_FLOAT_LEN))];
+        if (subStr.length < PADDING_FLOAT_LEN) {
+            NSMutableString *paddingStr = subStr.mutableCopy;
+            char *enData = (char*)malloc(PADDING_FLOAT_LEN - subStr.length);
+            bzero(enData, PADDING_FLOAT_LEN - subStr.length);
+            NSString *zeroStr = [NSString stringWithFormat:@"%s", enData];
+            [paddingStr appendString:zeroStr];
+            subStr = paddingStr;
+            free(enData);
+            enData = NULL;
+        }
         NSString *ss = [[self encryptByRsaToData:subStr withKeyType:(keyType)] base64EncodedString];
         [encryptStr appendString:ss];
     }
@@ -203,7 +214,7 @@
     for (NSInteger i = 0; i < ceilf(str.length / 172); i ++) {
         NSString *subStr = [str substringWithRange:NSMakeRange(i * 172, 172)];
         NSString *rrr = [self decryptByRsa:subStr withKeyType:(keyType)];
-        NSString *sss = rrr.length <= 117 ? rrr : [rrr substringToIndex:117];
+        NSString *sss = rrr.length <= PADDING_FLOAT_LEN ? rrr : [rrr substringToIndex:PADDING_FLOAT_LEN];
         [mutableResultStr appendString:sss];
     }
     
@@ -216,7 +227,7 @@
         return nil;
     NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
     NSInteger length = [data length];
-    float block_length = 117.0;
+    float block_length = PADDING_FLOAT_LEN;
     NSMutableData *muData = [NSMutableData data];
 
     for (NSInteger i = 0; i < ceilf(length / block_length); i++) {
@@ -226,6 +237,15 @@
             tmpData = [data subdataWithRange:NSMakeRange(location, block_length)];
         } else {
             tmpData = [data subdataWithRange:NSMakeRange(location, length - location)];
+            if (PADDING == RSA_PADDING_TYPE_NONE) {
+                long len = block_length - (length - location);
+                NSMutableData *paddingData = tmpData.mutableCopy;
+                char *enData = (char*)malloc(len);
+                memset(enData, '0', block_length - length);
+                [paddingData appendBytes:enData length:len];
+                tmpData = paddingData;
+            }
+           
         }
         char *enData = (char*)malloc(block_length);
         bzero(enData, block_length);
@@ -235,7 +255,9 @@
         } else {
             status = RSA_private_encrypt([tmpData length], (unsigned char *)[tmpData bytes], (unsigned char *)enData, _rsa, PADDING);
         }
+        NSLog(@"%@", tmpData);
         if (status) {
+            NSLog(@"%d", status);
             [muData appendBytes:enData length:status];
             free(enData);
             enData = NULL;
@@ -245,6 +267,9 @@
             return @"";
         }
     }
+    
+
+//    NSLog(@"%s", enData);
 
     return [muData base64EncodedString];
     
@@ -275,11 +300,15 @@
         } else {
             status = RSA_private_decrypt([tmpData length], (unsigned char *)[tmpData bytes], (unsigned char *)decData, _rsa, PADDING);
         }
+        char sub[128];
+        strncpy(sub, decData,128);
         if (status) {
-            muData = join(muData, decData);
+            muData = join(muData, sub);
+            tmpData = nil;
             free(decData);
             decData = NULL;
         } else {
+            tmpData = nil;
             free(decData);
             decData = NULL;
             return @"";
