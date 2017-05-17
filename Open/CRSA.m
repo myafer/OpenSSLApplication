@@ -3,8 +3,8 @@
 #define BUFFSIZE  1024
 #import "Base64.h"
 
-#define PADDING RSA_NO_PADDING
-#define PADDING_FLOAT_LEN [self getBlockSizeWithRSA_PADDING_TYPE:PADDING] * 1.0
+#define PADDING RSA_PKCS1_PADDING
+#define PADDING_FLOAT_LEN ([self getBlockSizeWithRSA_PADDING_TYPE:PADDING] * 1.0)
 #define DocumentsDir [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 #define OpenSSLRSAKeyDir [DocumentsDir stringByAppendingPathComponent:@".openssl_rsa"]
 #define RSAPublickKeyFile [DocumentsDir stringByAppendingPathComponent:@"public_key.pem"]
@@ -215,7 +215,6 @@
 - (NSString *)decryptByRsaWith:(NSString *)str keyType:(KeyType)keyType {
     if (![self importRSAKeyWithType:keyType])
         return nil;
-
     NSMutableString *mutableResultStr = @"".mutableCopy;
     for (NSInteger i = 0; i < ceilf(str.length / 172); i ++) {
         NSString *subStr = [str substringWithRange:NSMakeRange(i * 172, 172)];
@@ -223,7 +222,6 @@
         NSString *sss = rrr.length <= PADDING_FLOAT_LEN ? rrr : [rrr substringToIndex:PADDING_FLOAT_LEN];
         [mutableResultStr appendString:sss];
     }
-    
     return [mutableResultStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
 }
