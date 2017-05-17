@@ -61,23 +61,9 @@
     // 加密过程： str -> utf8编码 -> 字符串分割 -> 循环加密 -> 拼接 -> 结果
     // 解密过程： str -> 字符串分割 -> 循环解密 -> 拼接 -> utf8解码 -> 原字符串
     
-//    NSString *en = [cc encryptByRsaWith:oo keyType:(KeyTypePrivate)];
-//    NSString *de = [cc decryptByRsaWith:en keyType:(KeyTypePublic)];
-//    if ([oo isEqualToString:de]) {
-//        NSLog(@"**********************************");
-//        NSLog(@"*          解密成功！             *");
-//        NSLog(@"*          解密成功！             *");
-//        NSLog(@"*          解密成功！             *");
-//        NSLog(@"*         成功  %ld 次            *" , ++ num);
-//        NSLog(@"**********************************");
-//    }
-
-
-    // 🌰2. 加解密不支持中文 需要预先转码 配套Java代码在项目内
-    
-    NSString *en1 = [cc encryptByRsaWithCutData:[oo base64EncodedString] keyType:(KeyTypePrivate)];
-    NSString *de1 = [cc decryptByRsaWithCutData:en1 keyType:(KeyTypePublic)];
-    if ([oo isEqualToString:[de1 base64DecodedString]]) {
+    NSString *en = [cc encryptByRsaWith:oo keyType:(KeyTypePrivate)];
+    NSString *de = [cc decryptByRsaWith:en keyType:(KeyTypePublic)];
+    if ([oo isEqualToString:de]) {
         NSLog(@"**********************************");
         NSLog(@"*          解密成功！             *");
         NSLog(@"*          解密成功！             *");
@@ -86,7 +72,21 @@
         NSLog(@"**********************************");
     }
 
-    NSLog(@"%@", [de1 base64DecodedString]);
+
+    // 🌰2. 加解密不支持中文 需要预先转码 配套Java代码在项目内
+    
+//    NSString *en1 = [cc encryptByRsaWithCutData:[oo base64EncodedString] keyType:(KeyTypePrivate)];
+//    NSString *de1 = [cc decryptByRsaWithCutData:en1 keyType:(KeyTypePublic)];
+//    if ([oo isEqualToString:[de1 base64DecodedString]]) {
+//        NSLog(@"**********************************");
+//        NSLog(@"*          解密成功！             *");
+//        NSLog(@"*          解密成功！             *");
+//        NSLog(@"*          解密成功！             *");
+//        NSLog(@"*         成功  %ld 次            *" , ++ num);
+//        NSLog(@"**********************************");
+//    }
+//
+//    NSLog(@"%@", [de1 base64DecodedString]);
     
     
 }
